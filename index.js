@@ -1,11 +1,14 @@
 //getting properties from matter.js
 const { Engine, Render, Runner, Composite, Bodies, Body, Events } = Matter;
 
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = window.innerWidth - 20;
+const height = window.innerHeight - 20;
 
-const cellsHorizontal = 10;
-const cellsVertical = 5;
+const min = 5;
+const max = 15;
+
+const cellsHorizontal = Math.floor(Math.random() * (max - min) + min);
+const cellsVertical = Math.floor(Math.random() * (max - min) + min) - 2;
 
 //an individual wall's length
 const unitLengthX = width / cellsHorizontal;
@@ -29,21 +32,33 @@ const render = Render.create({
 
 //create walls
 const walls = [
-	Bodies.rectangle(width / 2, 0, width, 2, {
+	Bodies.rectangle(width / 2, 0, width, 10, {
 		isStatic: true,
 		label: "frame",
+		render: {
+			fillStyle: "red",
+		},
 	}),
-	Bodies.rectangle(width / 2, height, width, 2, {
+	Bodies.rectangle(width / 2, height, width, 10, {
 		isStatic: true,
 		label: "frame",
+		render: {
+			fillStyle: "red",
+		},
 	}),
-	Bodies.rectangle(0, height / 2, 2, height, {
+	Bodies.rectangle(0, height / 2, 10, height, {
 		isStatic: true,
 		label: "frame",
+		render: {
+			fillStyle: "red",
+		},
 	}),
-	Bodies.rectangle(width, height / 2, 2, height, {
+	Bodies.rectangle(width, height / 2, 10, height, {
 		isStatic: true,
 		label: "frame",
+		render: {
+			fillStyle: "red",
+		},
 	}),
 ];
 
@@ -134,7 +149,7 @@ horizontals.forEach((row, rowIndex) => {
 			columnIndex * unitLengthX + unitLengthX / 2,
 			rowIndex * unitLengthY + unitLengthY,
 			unitLengthX,
-			1,
+			4,
 			{
 				label: "wall",
 				isStatic: true,
@@ -154,7 +169,7 @@ verticals.forEach((row, rowIndex) => {
 		const wall = Bodies.rectangle(
 			columnIndex * unitLengthX + unitLengthX,
 			rowIndex * unitLengthY + unitLengthY / 2,
-			1,
+			4,
 			unitLengthY,
 			{
 				label: "wall",
@@ -173,7 +188,7 @@ const goal = Bodies.rectangle(
 	width - unitLengthX / 2,
 	height - unitLengthY / 2,
 	unitLengthX * 0.5,
-	unitLengthX * 0.5,
+	unitLengthY * 0.5,
 	{
 		label: "goal",
 		isStatic: true,
