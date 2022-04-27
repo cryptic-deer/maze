@@ -62,7 +62,6 @@ const walls = [
 	}),
 ];
 
-Composite.add(world, walls);
 //Maze generation
 //for randomizing the order of the neighbors
 const shuffle = arr => {
@@ -255,6 +254,7 @@ Events.on(engine, "collisionStart", event => {
 	});
 });
 
+Composite.add(world, walls);
 //run the renderer
 Render.run(render);
 //create runner
